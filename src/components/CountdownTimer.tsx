@@ -41,16 +41,16 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
           {message}
         </h2>
         <div className="relative">
-          <div className="text-8xl font-mono font-bold text-indigo-600 mb-4">
-            {timeLeft}
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center z-0">
             <div 
               className="w-32 h-32 border-4 border-indigo-200 rounded-full"
               style={{
                 background: `conic-gradient(#4f46e5 ${((seconds - timeLeft) / seconds) * 360}deg, transparent 0deg)`
               }}
             />
+          </div>
+          <div className="text-8xl font-mono font-bold text-black mb-4 relative z-10">
+            {timeLeft}
           </div>
         </div>
         <p className="text-lg text-gray-600 mt-4">

@@ -40,8 +40,11 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 
 	// Handle cancel confirmation
 	const handleCancelClick = useCallback(() => {
+		if (!isPaused) {
+      setIsPaused(true);
+		}
 		setShowCancelModal(true);
-	}, []);
+	}, [isPaused]);
 
 	const handleConfirmCancel = useCallback(() => {
 		onCancel();
@@ -138,11 +141,11 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 	if (isPageBreak) {
 		return (
 			<>
-				<div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-yellow-50 to-orange-100">
-					<div className="text-center p-8 bg-white rounded-xl shadow-2xl border border-gray-200 max-w-md">
-						<div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-6">
+				<div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-yellow-50 to-orange-100 px-4">
+					<div className="text-center p-4 sm:p-8 bg-white rounded-xl shadow-2xl border border-gray-200 max-w-md w-full mx-4">
+						<div className="w-12 h-12 sm:w-16 sm:h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
 							<svg
-								className="w-8 h-8 text-white"
+								className="w-6 h-6 sm:w-8 sm:h-8 text-white"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -155,30 +158,30 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 								/>
 							</svg>
 						</div>
-						<h2 className="text-2xl font-bold text-gray-800 mb-4">
+						<h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
 							Turn to Next Page
 						</h2>
-						<p className="text-gray-600 mb-6">
+						<p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
 							Please turn to the next page in your answer sheet.
 						</p>
-						<div className="text-6xl font-mono font-bold text-yellow-600 mb-2">
+						<div className="text-4xl sm:text-6xl font-mono font-bold text-yellow-600 mb-2">
 							{pageBreakTimeLeft}
 						</div>
-						<p className="text-sm text-gray-500">
+						<p className="text-xs sm:text-sm text-gray-500">
 							{isPaused ? 'Paused' : `Continuing in ${pageBreakTimeLeft} seconds...`}
 						</p>
 						
 						{/* Control buttons */}
-						<div className="flex justify-center space-x-4 mt-6">
+						<div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 mt-4 sm:mt-6">
 							<button
 								onClick={handlePauseResume}
-								className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+								className="px-3 py-2 sm:px-4 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
 							>
 								{isPaused ? 'Resume' : 'Pause'}
 							</button>
 							<button
 								onClick={handleCancelClick}
-								className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
+								className="px-3 py-2 sm:px-4 sm:py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
 							>
 								Cancel
 							</button>
@@ -217,23 +220,23 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 
 	return (
 		<>
-			<div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 text-center">
+			<div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 text-center px-4">
 				{/* Control buttons at the top */}
-				<div className="fixed top-4 left-1/2 transform -translate-x-1/2 flex space-x-4 z-10">
+				<div className="fixed top-4 left-1/2 transform -translate-x-1/2 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 z-10 items-center">
 					<button
 						onClick={handlePauseResume}
-						className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors shadow-lg"
+						className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors shadow-lg text-sm sm:text-base w-32 sm:w-auto"
 					>
 						{isPaused ? (
 							<>
-								<svg className="w-5 h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<svg className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
 									<path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
 								</svg>
 								Resume
 							</>
 						) : (
 							<>
-								<svg className="w-5 h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<svg className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
 									<path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
 								</svg>
 								Pause
@@ -242,18 +245,32 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 					</button>
 					<button
 						onClick={handleCancelClick}
-						className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors shadow-lg"
+						className="px-4 py-2 sm:px-6 sm:py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors shadow-lg text-sm sm:text-base w-32 sm:w-auto"
 					>
-						<svg className="w-5 h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
+						<svg className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
 							<path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
 						</svg>
 						Cancel
 					</button>
 				</div>
 
+				{/* Paused Status Indicator */}
+				{isPaused && (
+					<div className="fixed top-20 sm:top-20 left-1/2 transform -translate-x-1/2 z-10 px-4">
+						<div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg px-3 py-2 sm:px-6 sm:py-3 shadow-lg">
+							<div className="flex items-center space-x-2">
+								<svg className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+									<path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+								</svg>
+								<span className="text-sm sm:text-2xl font-bold text-yellow-800">EXAM PAUSED</span>
+							</div>
+						</div>
+					</div>
+				)}
+
 				{/* Progress indicator */}
-				<div className="mb-6 mt-20">
-					<div className="flex flex-col justify-between text-sm text-gray-600 mb-2 min-w-40">
+				<div className="mb-4 sm:mb-2 w-full max-w-md px-4">
+					<div className="flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-gray-600 mb-2 space-y-1 sm:space-y-0">
 						<span>
 							Word {currentWordIndex + 1} of {words.length}
 						</span>
@@ -273,15 +290,15 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 				</div>
 
 				{/* Timer display */}
-				<div className="mb-8">
-					<div className="text-6xl font-mono font-bold text-gray-400 mb-2">
+				<div className="mb-6 sm:mb-8">
+					<div className="text-4xl sm:text-6xl font-mono font-bold text-gray-400 mb-2">
 						{timeLeft}
 					</div>
 				</div>
 
 				{/* Current word display */}
-				<div className="mb-8">
-					<h1 className="text-6xl font-bold text-gray-800 mb-4">
+				<div className="mb-6 sm:mb-8 px-4">
+					<h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4 break-words">
 						{words[currentWordIndex]?.toUpperCase() || ""}
 					</h1>
 				</div>
@@ -289,27 +306,27 @@ export const ExamInterface: React.FC<ExamInterfaceProps> = ({ onComplete, onCanc
 
 			{/* Cancel Confirmation Modal */}
 			{showCancelModal && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-					<div className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl">
-						<div className="text-center mb-6">
-							<svg className="w-16 h-16 text-red-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+					<div className="bg-white rounded-xl p-4 sm:p-6 max-w-md w-full shadow-2xl">
+						<div className="text-center mb-4 sm:mb-6">
+							<svg className="w-12 h-12 sm:w-16 sm:h-16 text-red-600 mx-auto mb-3 sm:mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
 							</svg>
-							<h3 className="text-xl font-bold text-gray-800 mb-2">Cancel Exam?</h3>
-							<p className="text-gray-600">
+							<h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">Cancel Exam?</h3>
+							<p className="text-gray-600 text-sm sm:text-base">
 								Are you sure you want to cancel the exam? All progress will be lost and you&apos;ll return to the home screen.
 							</p>
 						</div>
-						<div className="flex justify-center space-x-4">
+						<div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
 							<button
 								onClick={handleDismissModal}
-								className="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg font-semibold transition-colors"
+								className="px-4 py-2 sm:px-6 sm:py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg font-semibold transition-colors text-sm sm:text-base order-2 sm:order-1"
 							>
 								Continue Exam
 							</button>
 							<button
 								onClick={handleConfirmCancel}
-								className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
+								className="px-4 py-2 sm:px-6 sm:py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base order-1 sm:order-2"
 							>
 								Yes, Cancel
 							</button>
