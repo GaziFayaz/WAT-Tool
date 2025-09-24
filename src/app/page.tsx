@@ -110,7 +110,7 @@ export default function Home() {
                 <div className="w-6 h-6 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">3</div>
                 <div>
                   <h4 className="font-semibold text-gray-800">Page Breaks</h4>
-                  <p className="text-gray-600">After the 20th and 60th words, there will be a 5-second break with instructions to turn the page.</p>
+                  <p className="text-gray-600">Recommended 20 words per page. After the 20th and 60th words, there will be a 5-second break with instructions to turn the page.</p>
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function Home() {
                 <div className="w-6 h-6 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">4</div>
                 <div>
                   <h4 className="font-semibold text-gray-800">Your Response</h4>
-                  <p className="text-gray-600">For each word, write down the first word that comes to your mind. Do not overthink it.</p>
+                  <p className="text-gray-600">For each word shown, write a complete sentence that uses that word. Write the first sentence that comes to mind - don&apos;t overthink it.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
